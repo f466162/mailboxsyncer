@@ -1,4 +1,4 @@
-FROM alpine:stable
+FROM alpine
 
 ADD sync.sh /sync.sh
 
