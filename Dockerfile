@@ -2,9 +2,9 @@ FROM alpine
 
 ADD sync.sh /sync.sh
 
-RUN apk add --no-cache imapsync && \
+RUN apk add --no-cache imapsync jq && \
     chmod +x /sync.sh && \
-    adduser --home /data --no-create-home --system syncer
+    adduser --uid 999 --home /data --no-create-home --system syncer
 
 VOLUME /data
 
