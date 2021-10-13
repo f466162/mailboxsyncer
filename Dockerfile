@@ -3,7 +3,6 @@ FROM alpine
 ADD sync.sh /sync.sh
 
 RUN apk add --no-cache imapsync && \
-    apk cache clean && \
     chmod +x /sync.sh && \
     useradd -r -d /data syncer
 
