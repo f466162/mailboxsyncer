@@ -52,9 +52,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            # minimal
             type=edge
-            # define default branch
             type=edge,branch=main
 
       # Build and push Docker image with Buildx (don't push on PR)
