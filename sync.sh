@@ -7,7 +7,7 @@ export TMP_ROOT=${TMP_ROOT:=$HOME/tmp}
 export LOG_KEEP_DAYS=${LOG_KEEP_DAYS:=3}
 
 # Strict umask
-umask 177
+umask 077
 
 # Is config readable?
 if ! [ -r "$1" ]
