@@ -4,7 +4,7 @@ ADD sync.sh /sync.sh
 
 RUN apk add --no-cache imapsync && \
     chmod +x /sync.sh && \
-    useradd -r -d /data syncer
+    adduser --home /data --no-create-home --system syncer
 
 VOLUME /data
 
