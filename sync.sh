@@ -48,7 +48,7 @@ then
 fi
 
 # Create unique job id
-export JOB_ID="`echo -n "${from_server}:${from_user}:${to_server}:${to_user}" | sha512sum`"
+export JOB_ID="`echo -n "${from_server}:${from_user}:${to_server}:${to_user}" | sha512sum | cut -c1-16`"
 
 # Derive folders from job id
 export TMP_DIR="${TMP_ROOT}/${JOB_ID}/sync"
