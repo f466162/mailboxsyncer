@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  syncer:
+    image: 
+    restart: unless-stopped
+    volumes:
+      - syncer_data:/data
+    secrets:
+      - from_secret_file
+      - to_secret_file
+    labels:
+      - deck-chores.example.command: /sync.sh example.conf
+      - deck-chores.example.interval: hourly
+      - deck-chores.example.jitter: 30
+  
+  scheduler:
+    image: funkyfuture/deck-chores
+    environment:
+      TIMEZONE: Europe/Berlin
+      DEFAULT_MAX: 1
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  secrets:
+    from_secret_file:
+      file: from_secret
+    to_secret_file:
+      file: to_secret
+
+  volumes:
+    syncer_data:
