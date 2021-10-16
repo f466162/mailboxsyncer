@@ -24,4 +24,4 @@ WORKDIR /data
 
 USER syncer
 
-ENTRYPOINT [ "/usr/local/bin/supercronic", "/data/crontab" ]
+ENTRYPOINT [ "/usr/local/bin/supercronic", "-quiet", "/data/crontab" ]
