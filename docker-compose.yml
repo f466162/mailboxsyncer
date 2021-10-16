@@ -7,13 +7,13 @@ services:
     environment:
       - TZ=Europe/Berlin
     volumes:
-      - ./data:/data
+      - ./tmp:/data
     secrets:
       - from_secret_file
       - to_secret_file
 
 secrets:
   from_secret_file:
-    file: ...
+    file: ./tmp/from.pass
   to_secret_file:
-    file: ...
+    file: ./tmp/to.pass
