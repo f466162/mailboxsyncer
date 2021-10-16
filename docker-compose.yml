@@ -4,24 +4,13 @@ services:
   syncer:
     image: ghcr.io/f466162/mailboxsyncer:edge
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
     volumes:
       - ./data:/data
     secrets:
       - from_secret_file
       - to_secret_file
-    labels:
-      - "deck-chores.example.command=/sync.sh example-config.conf"
-      - "deck-chores.example.interval=hourly"
-      - "deck-chores.example.jitter=60"
-  
-  scheduler:
-    image: funkyfuture/deck-chores:1.2.0
-    environment:
-      TIMEZONE: Europe/Berlin
-      DEFAULT_MAX: 1
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 
 secrets:
   from_secret_file:

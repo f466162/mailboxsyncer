@@ -68,6 +68,6 @@ fi
 
 # Run imapsync
 # --debugssl 0 --nolog --pidfile "${TMP_DIR}/imapsync.pid" --pidfilelocking --no-modulesversion
-exec imapsync --tmpdir "${TMP_DIR}" --nolog --debugssl 0 --pidfile "${pidfile}" --pidfilelocking  ${imapsync_opts} \
+exec imapsync --tmpdir "${TMP_DIR}" ${imapsync_opts} \
        --host1 "${from_server}" --user1 "${from_username}" --passfile1 "${from_secret_file}" ${from_opts} \
        --host2 "${to_server}"   --user2 "${to_username}"   --passfile2 "${to_secret_file}"   ${to_opts}
