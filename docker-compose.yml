@@ -5,7 +5,10 @@ services:
     image: ghcr.io/f466162/mailboxsyncer:edge
     restart: unless-stopped
     environment:
-      - TZ=Europe/Berlin
+      - TZ
+      - SENTRY_DSN
+    env_file:
+      - tmp/env
     volumes:
       - ./tmp:/data
     secrets:
