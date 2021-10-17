@@ -2,6 +2,8 @@
 
 set -e
 
+LOCK="sync.lock"
+
 # Strict umask
 umask 077
 
@@ -44,6 +46,6 @@ then
 fi
 
 # Run imapsync
-exec imapsync ${imapsync_opts} \
+exec flock -w 600 -x ${LOCK} imapsync ${imapsync_opts} \
        --host1 "${from_server}" --user1 "${from_username}" --passfile1 "${from_secret_file}" ${from_opts} \
        --host2 "${to_server}"   --user2 "${to_username}"   --passfile2 "${to_secret_file}"   ${to_opts}
