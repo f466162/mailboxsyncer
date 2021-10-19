@@ -9,7 +9,7 @@ VOLUME /data
 ADD sync.sh /usr/local/bin/sync
 ADD crontab /data/crontab
 
-RUN apk add --no-cache imapsync bash curl tzdata && \
+RUN apk add --no-cache imapsync bash curl tzdata flock && \
     chmod +x /usr/local/bin/sync && \
     adduser --uid 999 --home /data --no-create-home --system syncer && \
     curl -fsSLO "$SUPERCRONIC_URL" && \
