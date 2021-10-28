@@ -1,4 +1,6 @@
-FROM alpine
+FROM gilleslamiral/imapsync
+
+USER root
 
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
@@ -9,7 +11,9 @@ VOLUME /data
 ADD sync.sh /usr/local/bin/sync
 ADD crontab /data/crontab
 
-RUN apk add --no-cache imapsync bash curl tzdata flock && \
+# apk add --no-cache imapsync bash curl tzdata flock && \
+RUN apt-get update && \
+    apt-get install -y curl && \
     chmod +x /usr/local/bin/sync && \
     adduser --uid 999 --home /data --no-create-home --system syncer && \
     curl -fsSLO "$SUPERCRONIC_URL" && \
@@ -17,7 +21,9 @@ RUN apk add --no-cache imapsync bash curl tzdata flock && \
     chmod +x "$SUPERCRONIC" && \
     mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" && \
     ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic && \
-    apk del curl
+    apt-get remove -y curl  && \
+    apt-get autoremove -y && \
+    apt-get autoclean -y
 
 WORKDIR /data
 
